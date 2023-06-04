@@ -16,26 +16,24 @@ function App() {
   contacts and appointments
   */
   const addContact = (newContactName, newContactPhone, newContactEmail) => {
-    setContacts([
+    setContacts([...contacts,
       {
         contactName: newContactName,
         contactPhone: newContactPhone,
         contactEmail: newContactEmail
-      },
-      ...contacts])
+      }
+    ])
   }
 
   const addAppointment = (newAppointmentName, newAppointmentDate, newAppointmentTime, newAppointmentContact) => {
-    setAppointments([
+    setAppointments([...appointments, 
       {
-        appointmentName: newAppointmentName,
-        appointmentContact: newAppointmentContact,
-        appointmentDate: newAppointmentDate,
-        appointmentTime: newAppointmentTime
-      },
-      ...appointments
-    ])
-  }
+        "appointmentName": newAppointmentName,
+        "appointmentContact": newAppointmentContact,
+        "appointmentDate": newAppointmentDate,
+        "appointmentTime": newAppointmentTime
+      }])
+    }
 
   const router = createBrowserRouter(createRoutesFromElements(
     <Route path="/" element={ <Root/> }>
