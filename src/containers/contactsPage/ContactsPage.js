@@ -13,6 +13,8 @@ export const ContactsPage = ({contacts, addContact}) => {
   const [currentEmail, setCurrentEmail] = useState()
   const [duplicateName, setDuplicateName] = useState(false)
 
+  // console.log(contacts)
+
   const handleSubmit = (e) => {
     e.preventDefault();
     /*
@@ -25,24 +27,36 @@ export const ContactsPage = ({contacts, addContact}) => {
       return
     }
 
+    const phonePattern = /^(\(\+\d{2}\)?|\+\d{2})? ?\d{3,4} ?\d{3} ?\d{3}$/
+    if (!phonePattern.test(currentPhone)) {
+      alert('The phone number doesn\'t match the usual pattern. Review and try again.')
+      return
+    }
+
     addContact(currentName, currentPhone, currentEmail)
 
     e.target.reset()
-
-    console.log(contacts)
   };
 
   /*
   Using hooks, check for contact name in the 
   contacts array variable in props
   */
+  useEffect(() => {
+    console.log(`Starting contacts lists is ` + JSON.stringify(contacts))
+  }, [])
+
+
+  useEffect(() => {
+    const allNames = contacts.map(contact => contact.contactName)
+    allNames.includes(currentName) ? setDuplicateName(true) : setDuplicateName(false)
+  }, [currentName])
+
    const handleChange = ({target}) => {
 
     switch(target.id) {
-      case 'name':
-        const allNames = contacts.map(contact => contact.contactName)
+      case 'name':   
         setCurrentName(target.value)
-        allNames.includes(target.value) ? setDuplicateName(true) : setDuplicateName(false)
         break
       case 'phone':
         setCurrentPhone(target.value)
@@ -60,15 +74,7 @@ export const ContactsPage = ({contacts, addContact}) => {
     <div>
       <section>
         <h2>Add Contact</h2> 
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="name">Name:</label>
-          <input id="name" type="text" onChange={handleChange} />
-          <label htmlFor="phone">Phone:</label>
-          <input id="phone" type="number"  onChange={handleChange} />
-          <label htmlFor="email">Email:</label>
-          <input id="email" type="text" onChange={handleChange} />
-          <input type="submit" />
-        </form>
+
         <ContactForm 
           name={currentName}
           setName={setCurrentName}
@@ -76,6 +82,8 @@ export const ContactsPage = ({contacts, addContact}) => {
           setPhone={setCurrentPhone}
           email={setCurrentEmail}
           setEmail={setCurrentEmail}
+          handleSubmit={handleSubmit}
+          handleChange={handleChange}
         />
       </section>
       <hr />
