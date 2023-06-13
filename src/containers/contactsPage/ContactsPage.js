@@ -13,8 +13,6 @@ export const ContactsPage = ({contacts, addContact}) => {
   const [currentEmail, setCurrentEmail] = useState()
   const [duplicateName, setDuplicateName] = useState(false)
 
-  // console.log(contacts)
-
   const handleSubmit = (e) => {
     e.preventDefault();
     /*
@@ -42,11 +40,6 @@ export const ContactsPage = ({contacts, addContact}) => {
   Using hooks, check for contact name in the 
   contacts array variable in props
   */
-  useEffect(() => {
-    console.log(`Starting contacts lists is ` + JSON.stringify(contacts))
-  }, [])
-
-
   useEffect(() => {
     const allNames = contacts.map(contact => contact.contactName)
     allNames.includes(currentName) ? setDuplicateName(true) : setDuplicateName(false)
