@@ -14,8 +14,15 @@ function App() {
     contactName:"Ben", contactPhone: "485756", contactEmail: "ben@hello.com"
   }
 
+  const initialStateAppointment = {
+    appointmentName: "Dentist",
+    appointmentContact: "Ben",
+    appointmentDate: "1 February 2023",
+    appointmentTime: "9 am"
+  }
+
   const [contacts, setContacts] = useState([initialState])
-  const [appointments, setAppointments] = useState([])
+  const [appointments, setAppointments] = useState([initialStateAppointment])
   /*
   Implement functions to add data to
   contacts and appointments
