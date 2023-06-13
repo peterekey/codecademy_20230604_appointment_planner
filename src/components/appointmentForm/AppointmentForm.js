@@ -27,10 +27,10 @@ export const AppointmentForm = ({
       <input id="title" type="text" onChange={e => setTitle(e.target.value)} value={title}/>
 
       <label htmlFor="contact">Guests:</label>
-      <ContactPicker contacts={contacts}/><br /><br />
+      <ContactPicker contacts={contacts} handleChange={(e) => setContact(e.target.value)} value={contact} name={title}/><br /><br />
 
       <label htmlFor="date" type="text">Appointment date:</label>
-      <input id="date" type="date" onChange={e => setDate(e.target.value)} value={date} min={getTodayString}/>
+      <input id="date" type="date" onChange={e => setDate(e.target.value)} value={date} min={getTodayString()}/>
 
       <label htmlFor="time" type="text">Appointment time:</label>
       <input id="time" type="time" onChange={e => setTime(e.target.value)} value={time} />
