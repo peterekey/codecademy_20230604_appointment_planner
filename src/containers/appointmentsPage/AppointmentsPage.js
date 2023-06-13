@@ -8,16 +8,17 @@ export const AppointmentsPage = ({appointments, addAppointment, contacts}) => {
   Define state variables for 
   appointment info
   */
- const [currentName, setCurrentName] = useState('')
+ const [currentTitle, setCurrentTitle] = useState('')
  const [currentContact, setCurrentContact] = useState('')
  const [currentDate, setCurrentDate] = useState('')
  const [currentTime, setCurrentTime] = useState('') 
 
-  const handleSubmit = (e) => {
+ const handleSubmit = (e) => {
     e.preventDefault();
     /*
     Add contact info and clear data  
     */
+   addAppointment(currentTitle, currentContact, currentDate, currentTime)
    
   };
 
@@ -26,8 +27,8 @@ export const AppointmentsPage = ({appointments, addAppointment, contacts}) => {
       <section>
         <h2>Add Appointment</h2>
         <AppointmentForm 
-          name={currentName}
-          setName={setCurrentName}
+          title={currentTitle}
+          setTitle={setCurrentTitle}
           contact={currentContact}
           setContact={setCurrentContact}
           date={currentDate}
